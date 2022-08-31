@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   http: HttpClient;
   progress: Number = 0;
   response: any = null;
+  imageUrl: string = 'https://res.cloudinary.com/dxilu9thb/image/upload/v1661962650/gqogvwgjtblob5zymduh.png';
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -67,7 +68,7 @@ export class AppComponent implements OnInit {
         reportProgress: true,
         observe: 'events',
       })
-      .subscribe((event) => {
+      .subscribe((event: any) => {
         if (event.type === HttpEventType.UploadProgress) {
           const total = event.total == undefined ? 1 : event.total;
 
@@ -76,7 +77,7 @@ export class AppComponent implements OnInit {
         }
 
         if (event.type === HttpEventType.Response) {
-          this.response = event.body;
+          this.imageUrl = event?.body?.body;
           this.response = 'loaded';
         }
       });

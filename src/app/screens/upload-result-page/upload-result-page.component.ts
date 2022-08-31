@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-upload-result-page',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./upload-result-page.component.css']
 })
 export class UploadResultPageComponent implements OnInit {
+  @Input()
+  imageUrl: string = '';
 
   constructor() { }
 
