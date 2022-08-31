@@ -86,11 +86,29 @@
   padding: 1rem 2rem;
   border-radius: 1rem;
   border: none;
-  background-color: #2f81eddb;
+  background-color: #686868db;
   color: #fff;
   font-size: 1.4rem;
 }
 
+.choose-a-file-button:hover {
+  background-color: #3b3b3bdb;
+}
+
+.submit-button {
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #2f91edce;
+  font-size: 1.4rem;
+  padding: 1rem 2rem;
+  margin-left: 1rem;
+  color: #fff;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #2f91ed;
+}
 
 
 @keyframes shake {
@@ -113,7 +131,7 @@
 
 
 .choose-a-file-button:hover {
-  background-color: #2F80ED;
+  background-color: #686868;
 }
 
 .choose-a-file-button--input-file {

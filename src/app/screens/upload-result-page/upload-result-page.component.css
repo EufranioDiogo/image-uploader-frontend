@@ -47,6 +47,9 @@
   position: relative;
   width: 100%;
   transition: shake 2s linear 1s;
+  height: 30.5rem;
+  border: 0.1rem dashed rgba(0, 0, 0, 0.452);
+  border-radius: 0.5rem;
 }
 
 .drag-and-drop-info {
@@ -69,11 +72,48 @@
   margin-bottom: 3rem;
   top: 0;
   left: 0;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .separator-row {
   margin: 2rem 0;
   display: flex;
   justify-content: center;
+}
+
+.clipboard-container {
+  display: flex;
+  margin: 3.5rem 0 0 0;
+  width: 100%;
+  background-color: #ebebeb;
+  padding: 0.5rem 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+  justify-content: space-between;
+}
+
+.image-url {
+  display: inline-block;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 75%;
+  font-size: 1.4rem;
+  border: none;
+}
+
+.copy-button {
+  width: 20%;
+  border: none;
+  background-color: #2f81edd2;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: white;
+  cursor: pointer;
+}
+
+.copy-button:hover {
+  background-color: #2f81ed;
 }

@@ -8,8 +8,24 @@
       <div class="drag-and-drop-container">
         <div class="drag-and-drop-info">
           <img alt="" [src]="imageUrl" class="uploaded-photo" />
-          <span class="drag-and-drop-text">File should be Jpeg, Png,...</span>
         </div>
+      </div>
+
+      <div class="clipboard-container">
+        <input
+          type="text"
+          class="image-url"
+          #imageUrlText
+          readonly="true"
+          [value]="imageUrl"
+          disabled
+        />
+        <button
+          class="copy-button"
+          (click)="copyTheImageUrl()"
+        >
+          {{ copied == false ? "Copy" : "Copied!" }}
+        </button>
       </div>
     </div>
   </div>

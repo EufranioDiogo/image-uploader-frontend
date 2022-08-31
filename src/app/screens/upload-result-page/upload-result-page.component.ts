@@ -9,9 +9,24 @@ export class UploadResultPageComponent implements OnInit {
   @Input()
   imageUrl: string = '';
 
+  copied: boolean = false;
+  public imageUrlText = '';
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  copyTheImageUrl() {
+    if (!this.copied) {
+      const spanText: HTMLInputElement | null = document.querySelector('.image-url');
+
+      spanText?.select();
+
+      navigator.clipboard.writeText(spanText === null ? '' : spanText?.value);
+
+      this.copied = true;
+    }
+    
+  }
 }

@@ -55,5 +55,5 @@
 
   <app-progress-bar *ngIf="response == 'loading'"></app-progress-bar>
 
-  <app-upload-result-page [imageUrl]="imageUrl"></app-upload-result-page>
+  <app-upload-result-page *ngIf="response == 'loaded'" [imageUrl]="imageUrl"></app-upload-result-page>
 </div>
