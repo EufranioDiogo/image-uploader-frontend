@@ -1,5 +1,5 @@
 <div class="main-container">
-  <div class="form-container">
+  <div class="form-container" *ngIf="response != 'loading' && response != 'loaded'">
     <div class="top-container">
       <h2 class="h2-title">Upload your Image</h2>
       <span class="about-text">File should be Jpeg, Png,...</span>
@@ -52,4 +52,6 @@
       </div>
     </form>
   </div>
+
+  <app-progress-bar *ngIf="response == 'loading'"></app-progress-bar>
 </div>

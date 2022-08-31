@@ -8,10 +8,11 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    imageInput: new FormControl(undefined),
+    imageInput: new FormControl(File),
   });
   http: HttpClient;
   progress: Number = 0;
+  response: any = null;
 
   constructor(http: HttpClient) {
     this.http = http;
@@ -20,8 +21,8 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {}
 
   onChangeInputImage(event: any) {
-    console.log(event);
     let files: FileList = event.target.files;
+
     let validExtensions: any = {
       'image/png': true,
       'image/jpg': true,
@@ -35,8 +36,9 @@ export class AppComponent implements OnInit {
         let file: File | null = files?.item(i);
 
         const fileExtension: string = file === null ? '' : file.type;
+        const fileSize: number = file === null ? 0 : file.size;
 
-        if (validExtensions[fileExtension]) {
+        if (validExtensions[fileExtension] && fileSize < 1048576) {
           validFiles.push(file);
         }
       }
@@ -58,10 +60,12 @@ export class AppComponent implements OnInit {
       }
     }
 
+    this.response = 'loading';
+
     this.http
       .post('http://localhost:8080/upload/image', formData, {
         reportProgress: true,
-        observe: 'events'
+        observe: 'events',
       })
       .subscribe((event) => {
         if (event.type === HttpEventType.UploadProgress) {
@@ -72,7 +76,8 @@ export class AppComponent implements OnInit {
         }
 
         if (event.type === HttpEventType.Response) {
-          console.log(event.body);
+          this.response = event.body;
+          this.response = 'loaded';
         }
       });
   }

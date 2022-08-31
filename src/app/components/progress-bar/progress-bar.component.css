@@ -1,0 +1,32 @@
+.progress-bar-container {
+  position: absolute;
+  width: 25rem;
+  height: 25rem;
+  background-color: #fff;
+  padding: 2rem;
+  border-radius: 1rem;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-snipper {
+  width: 50%;
+  height: 50%;
+  border-radius: 100%;
+  border: 0.5rem solid #f1f1f1;
+  animation: rotate 2s linear 0s infinite alternate;
+  border-top-color: #0077ff;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
