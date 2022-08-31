@@ -1,5 +1,11 @@
 # ImageUploaderFrontend
 
+My first project using Angular, only studying from official docs and individual search in StackOverflow.
+
+It's an application that allow users to upload their images in cloud, and with hability to retrieve them by a link.
+
+
+----
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.9.
 
 ## Development server
