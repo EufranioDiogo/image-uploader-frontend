@@ -5,7 +5,7 @@
       <span class="about-text">File should be Jpeg, Png,...</span>
     </div>
 
-    <form class="form" [formGroup]="form">
+    <form class="form" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="drag-and-drop-container">
         <div class="drag-and-drop-info">
           <img alt="" src="./../assets/gallery.png" class="gallery-icon" />
@@ -17,6 +17,8 @@
           type="file"
           name=""
           id=""
+          (change)="onChangeInputImage($event)"
+          multiple
         />
       </div>
 
@@ -27,7 +29,25 @@
       <div class="button-container">
         <button class="choose-a-file-button">
           <span class="normal-text">Choose a file</span>
-          <input class="choose-a-file-button--input-file" type="file" name="" id="" />
+          <input
+            class="choose-a-file-button--input-file"
+            type="file"
+            name=""
+            id=""
+            (change)="onChangeInputImage($event)"
+            multiple
+          />
+        </button>
+
+        <button
+          *ngIf="
+            form.value.imageInput != undefined
+          "
+          type="submit"
+          class="submit-button"
+          
+        >
+          Send
         </button>
       </div>
     </form>

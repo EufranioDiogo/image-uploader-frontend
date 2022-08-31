@@ -1,3 +1,4 @@
+import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Component, OnInit, ViewRef } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 @Component({
@@ -7,13 +8,72 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   form: FormGroup = new FormGroup({
-    imageContainerInput: new FormControl(''),
-    imageInput: new FormControl('')
-  })
+    imageInput: new FormControl(undefined),
+  });
+  http: HttpClient;
+  progress: Number = 0;
 
-  constructor() {}
+  constructor(http: HttpClient) {
+    this.http = http;
+  }
 
-  ngOnInit(): void {
-    console.log('dsidsi');
+  ngOnInit(): void {}
+
+  onChangeInputImage(event: any) {
+    console.log(event);
+    let files: FileList = event.target.files;
+    let validExtensions: any = {
+      'image/png': true,
+      'image/jpg': true,
+      'image/jpeg': true,
+      '': false,
+    };
+    let validFiles = [];
+
+    if (files && files.length > 0) {
+      for (let i = 0; i < files.length; i++) {
+        let file: File | null = files?.item(i);
+
+        const fileExtension: string = file === null ? '' : file.type;
+
+        if (validExtensions[fileExtension]) {
+          validFiles.push(file);
+        }
+      }
+      if (validFiles.length > 0) {
+        this.form.controls['imageInput'].setValue(validFiles[0]);
+      }
+    }
+  }
+
+  onSubmit(): void {
+    let formData: FormData = new FormData();
+    let normalForm = this.form.value;
+
+    for (let key in normalForm) {
+      if (normalForm[key] instanceof Blob) {
+        formData.append('file', normalForm[key], normalForm[key].name);
+      } else {
+        formData.append(key, normalForm[key].name);
+      }
+    }
+
+    this.http
+      .post('http://localhost:8080/upload/image', formData, {
+        reportProgress: true,
+        observe: 'events'
+      })
+      .subscribe((event) => {
+        if (event.type === HttpEventType.UploadProgress) {
+          const total = event.total == undefined ? 1 : event.total;
+
+          this.progress = Math.round((100 * event.loaded) / total);
+          console.log(this.progress + '%');
+        }
+
+        if (event.type === HttpEventType.Response) {
+          console.log(event.body);
+        }
+      });
   }
 }
